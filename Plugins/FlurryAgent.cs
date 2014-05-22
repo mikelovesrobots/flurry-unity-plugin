@@ -64,8 +64,6 @@ public class FlurryAgent : IDisposable
 	
 	public void setReportLocation(bool reportLocation){}
 	
-	public void logEvent(string eventId, Dictionary<string, string> parameters){}
-	
 	public void Dispose(){}
 	
 	
