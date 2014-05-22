@@ -21,6 +21,9 @@ public class FlurryAgent : IDisposable
 	
 	[DllImport("__Internal")]
 	private static extern void mLogEvent(string eventId);
+
+	[DllImport("__Internal")]
+	private static extern void mLogEventWithParams(string eventId, string keys, string values);
 	
 	[DllImport("__Internal")]
 	private static extern void mStopSession();
@@ -35,6 +38,16 @@ public class FlurryAgent : IDisposable
 	
 	public void logEvent(string eventId){
 		mLogEvent(eventId);
+	}
+
+	public void logEvent(string eventId, Dictionary<string, string> parameters){
+		string[] keys = new string[parameters.Keys.Count];
+		string[] values = new string[parameters.Values.Count];
+
+		parameters.Keys.CopyTo(keys, 0);
+		parameters.Values.CopyTo(values, 0);
+
+		mLogEventWithParams(eventId, String.Join(",", keys), String.Join(" ,", values));                    
 	}
 	
 	public void setContinueSessionMillis(long milliseconds){}

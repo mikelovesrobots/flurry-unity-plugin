@@ -28,6 +28,21 @@ extern "C" {
         NSLog(m);
         [Flurry logEvent:m];
     }
+    
+    const void mLogEventWithParams(const char *msg, const char *keys, const char *values){
+        NSString *m=[NSString stringWithFormat:@"%s",msg];
+        NSString *keyString=[NSString stringWithFormat:@"%s",keys];
+        NSString *valueString=[NSString stringWithFormat:@"%s",values];
+
+        NSArray *keyArray = [keyString componentsSeparatedByString:@","];
+        NSArray *valueArray = [valueString componentsSeparatedByString:@","];
+
+        NSDictionary *params = [NSDictionary dictionaryWithObjects:(id)valueArray
+                          forKeys:(id)keyArray];
+
+        NSLog(m);
+        [Flurry logEvent:m withParameters:params];
+    }
 }
 
 @end
