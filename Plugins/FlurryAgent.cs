@@ -15,7 +15,7 @@ public class FlurryAgent : IDisposable
 		}
 	}
 
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 	[DllImport("__Internal")]
 	private static extern void mStartSession(string apiKey);
 	
@@ -67,7 +67,7 @@ public class FlurryAgent : IDisposable
 	public void Dispose(){}
 	
 	
-#elif UNITY_ANDROID
+#elif UNITY_ANDROID && !UNITY_EDITOR
 	private AndroidJavaClass cls_FlurryAgent = new AndroidJavaClass("com.flurry.android.FlurryAgent");
 	
 	public void onStartSession(string apiKey)
